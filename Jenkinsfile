@@ -1,10 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:20'
-            args '-v /var/run/docker.sock:/var/run/docker.sock --network=host'
-        }
-    }
+    agent any
     stages {
         stage('Pre checkout') {
             steps {
@@ -21,6 +16,12 @@ pipeline {
         }
 
         stage('Install') {
+            agent {
+                docker {
+                    image 'node:20'
+                    args '-v /var/run/docker.sock:/var/run/docker.sock --network=host'
+                }
+            }
             steps { 
                 sh '''
                 cd ./node-proj
@@ -31,10 +32,18 @@ pipeline {
         }
 
         stage('Lint') {
-            steps { sh '''
-            cd ./node-proj
-            npm run lint:ci
-            ''' }
+            agent {
+                docker {
+                    image 'node:20'
+                    args '-v /var/run/docker.sock:/var/run/docker.sock --network=host'
+                }
+            }
+            steps { 
+                sh '''
+                cd ./node-proj
+                npm run lint:ci
+                ''' 
+            }
         }
 
         stage('Build Docker Image') {
