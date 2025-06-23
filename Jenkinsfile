@@ -20,8 +20,10 @@ pipeline {
         }
 
         stage('Install') {
-            steps { sh 'cd ./node-proj' }
-            steps { sh 'npm install' }
+            steps { 
+                sh 'cd ./node-proj' 
+                sh 'npm install'
+            }
         }
 
         // stage('Lint') {
