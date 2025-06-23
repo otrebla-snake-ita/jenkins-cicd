@@ -43,7 +43,7 @@ pipeline {
                 sh '''
                 pwd
                 whoami
-                docker build -t flask-api:1.0 .
+                docker build -t flask-api:1.0 ./node-proj
                 '''
             }
         }
