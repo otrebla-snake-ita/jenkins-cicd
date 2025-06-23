@@ -22,9 +22,11 @@ pipeline {
 
         stage('Install') {
             steps { 
-                sh 'cd ./node-proj
-                    npm install
-                    ls -la' 
+                sh '''
+                cd ./node-proj
+                npm install
+                ls -la
+                '''
             }
         }
 
