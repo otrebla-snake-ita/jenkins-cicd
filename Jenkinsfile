@@ -22,7 +22,9 @@ pipeline {
 
         stage('Install') {
             steps { 
+                sh 'pwd'
                 sh 'cd ./node-proj' 
+                sh 'pwd'
                 sh 'npm install'
             }
         }
