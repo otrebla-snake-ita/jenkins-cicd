@@ -30,9 +30,11 @@ pipeline {
             }
         }
 
-        // stage('Lint') {
-        //     steps { sh 'cd ./node-proj' }
-        //     steps { sh 'npm run lint:ci' }
-        // }
+        stage('Lint') {
+            steps { sh '''
+            cd ./node-proj
+            npm run lint:ci
+            ''' }
+        }
     }
 }
