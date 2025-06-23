@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        docker {
+        dockerContainer {
             image 'node:20'
         }
     }
@@ -20,6 +20,7 @@ pipeline {
         }
 
         stage('Install') {
+            steps { sh 'cd ./node-proj' }
             steps { sh 'npm install' }
         }
 
