@@ -17,7 +17,7 @@ pipeline {
 
         stage('Install') {
             agent {
-                docker {
+                dockerContainer {
                     image 'node:20'
                     args '-v /var/run/docker.sock:/var/run/docker.sock --network=host'
                 }
@@ -33,7 +33,7 @@ pipeline {
 
         stage('Lint') {
             agent {
-                docker {
+                dockerContainer {
                     image 'node:20'
                     args '-v /var/run/docker.sock:/var/run/docker.sock --network=host'
                 }
