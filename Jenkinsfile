@@ -19,7 +19,7 @@ pipeline {
             agent {
                 dockerContainer {
                     image 'node:20'
-                    args '-v /var/run/docker.sock:/var/run/docker.sock --network=host'
+                    args '-u root --privileged -v /var/run/docker.sock:/var/run/docker.sock'
                 }
             }
             steps { 
@@ -35,7 +35,7 @@ pipeline {
             agent {
                 dockerContainer {
                     image 'node:20'
-                    args '-v /var/run/docker.sock:/var/run/docker.sock --network=host'
+                    args '-u root --privileged -v /var/run/docker.sock:/var/run/docker.sock'
                 }
             }
             steps { 
