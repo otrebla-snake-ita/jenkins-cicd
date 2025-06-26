@@ -10,8 +10,24 @@ pipeline {
         stage('Clone repo') {
             steps {
                 sh 'pwd'
-                git branch: 'main', url: 'https://github.com/otrebla-snake-ita/jenkins-cicd.git'
+                git branch: 'develop', url: 'https://github.com/otrebla-snake-ita/jenkins-cicd.git'
                 sh 'ls -la'
+            }
+        }
+
+        stage('Controllo merge da feature/*') {
+            when {
+                expression {
+                    def msg = sh(
+                        script: "git log -1 --pretty=%B",
+                        returnStdout: true
+                    ).trim()
+                    echo "Ultimo commit: ${msg}"
+                    return msg =~ /Merge.*feature\//
+                }
+            }
+            steps {
+                echo "È un merge da feature/* → eseguo"
             }
         }
 
