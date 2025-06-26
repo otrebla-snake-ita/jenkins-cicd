@@ -10,7 +10,7 @@ pipeline {
         stage('Clone repo') {
             steps {
                 sh 'pwd'
-                git branch: 'develop', url: 'https://github.com/otrebla-snake-ita/jenkins-cicd.git'
+                checkout scm
                 sh 'ls -la'
             }
         }
