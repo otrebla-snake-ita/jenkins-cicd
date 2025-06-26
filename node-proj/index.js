@@ -12,5 +12,5 @@ app.get('/api/hello', (req, res) => {
 // Avvio server
 app.listen(port, () => {
     console.log(`Server attivo su http://localhost:${port}`);
-    console.log('Nuova funzionalità, versione 2');
+    console.log('Nuova funzionalità, versione 3');
 });
