@@ -52,23 +52,23 @@ pipeline {
                 sh '''
                 pwd
                 whoami
-                docker build -t flask-api:1.0 ./node-proj
+                docker build -t node-api:1.0 ./node-proj
                 '''
             }
         }
     }
-    post {
-        success {
-            echo 'OK'
-            mail to: 'alberto.marinucci@insoore.com',
-            subject: "Build Success: ${currentBuild.fullDisplayName}.",
-            body: "The build was successful! Check the logs here: ${env.BUILD_URL}"
-        }
-        failure {
-            echo 'KO'
-            mail to: 'alberto.marinucci@insoore.com',
-            subject: "Build failed: ${currentBuild.fullDisplayName}",
-            body: "The build was failed!. Check the logs here: ${env.BUILD_URL}"
-        }
-    }
+    // post {
+    //     success {
+    //         echo 'OK'
+    //         mail to: 'alberto.marinucci@insoore.com',
+    //         subject: "Build Success: ${currentBuild.fullDisplayName}.",
+    //         body: "The build was successful! Check the logs here: ${env.BUILD_URL}"
+    //     }
+    //     failure {
+    //         echo 'KO'
+    //         mail to: 'alberto.marinucci@insoore.com',
+    //         subject: "Build failed: ${currentBuild.fullDisplayName}",
+    //         body: "The build was failed!. Check the logs here: ${env.BUILD_URL}"
+    //     }
+    // }
 }
