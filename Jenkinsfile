@@ -1,4 +1,4 @@
-def CURRENT_BRANCH = ''
+// def CURRENT_BRANCH = ''
 pipeline {
     agent any
     stages {
@@ -15,21 +15,21 @@ pipeline {
         stage('Clone repo') {
             steps {
                 sh 'pwd'
-                checkout scm // Dovrebbe far capire a Jenkins il branch da cui è partita l'operazione (push su main = main ecc.)
-                // git branch: 'main', url: 'https://github.com/otrebla-snake-ita/jenkins-cicd.git'
+                // checkout scm // Dovrebbe far capire a Jenkins il branch da cui è partita l'operazione (push su main = main ecc.)
+                git branch: 'main', url: 'https://github.com/otrebla-snake-ita/jenkins-cicd.git'
                 sh 'ls -la'
             }
         }
 
-        stage('Stampa branch') {
-            steps {
-                script {
-                    CURRENT_BRANCH = sh(script: "git rev-parse --abbrev-ref HEAD", returnStdout: true).trim()
+        // stage('Stampa branch') {
+        //     steps {
+        //         script {
+        //             CURRENT_BRANCH = sh(script: "git rev-parse --abbrev-ref HEAD", returnStdout: true).trim()
                     
-                    echo "Branch corrente: ${CURRENT_BRANCH}"
-                }
-            }
-        }
+        //             echo "Branch corrente: ${CURRENT_BRANCH}"
+        //         }
+        //     }
+        // }
         
         stage('Install') {
             agent {
@@ -73,27 +73,27 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
-            when {
-                expression {
-                    return CURRENT_BRANCH == 'develop'
-                }
-            }
-            steps {
-                echo 'Deploying to DEV environment'
-            }
-        }
+        // stage('Deploy') {
+        //     when {
+        //         expression {
+        //             return CURRENT_BRANCH == 'develop'
+        //         }
+        //     }
+        //     steps {
+        //         echo 'Deploying to DEV environment'
+        //     }
+        // }
 
-        stage('Deploy to Production') {
-            when {
-                expression {
-                    return CURRENT_BRANCH == 'main'
-                }
-            }
-            steps {
-                echo 'Deploying to PRODUCTION'
-            }
-        }
+        // stage('Deploy to Production') {
+        //     when {
+        //         expression {
+        //             return CURRENT_BRANCH == 'main'
+        //         }
+        //     }
+        //     steps {
+        //         echo 'Deploying to PRODUCTION'
+        //     }
+        // }
     }
     // post {
     //     success {
