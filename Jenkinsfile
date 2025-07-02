@@ -56,6 +56,24 @@ pipeline {
                 '''
             }
         }
+
+        stage('Deploy') {
+            when {
+                branch 'develop'
+            }
+            steps {
+                echo 'Deploying to DEV environment'
+            }
+        }
+
+        stage('Deploy to Production') {
+            when {
+                branch 'main'
+            }
+            steps {
+                echo 'Deploying to PRODUCTION'
+            }
+        }
     }
     // post {
     //     success {
