@@ -1,6 +1,7 @@
 pipeline {
     agent any
     stages {
+
         stage('Pre checkout') {
             steps {
                 echo "Hello world"
@@ -15,6 +16,15 @@ pipeline {
             }
         }
 
+        stage('Stampa branch') {
+            steps {
+                script {
+                    echo "BRANCH_NAME: ${env.BRANCH_NAME}"
+                    echo "GIT_COMMIT: ${env.GIT_COMMIT}"
+                }
+            }
+        }
+        
         stage('Install') {
             agent {
                 docker {
