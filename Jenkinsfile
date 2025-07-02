@@ -6,6 +6,9 @@ pipeline {
         stage('Pre checkout') {
             steps {
                 echo "Hello world"
+                script {
+                    echo "branch name: ${params.branchName}"
+                }
             }
         }
 
@@ -22,6 +25,7 @@ pipeline {
             steps {
                 script {
                     CURRENT_BRANCH = sh(script: "git rev-parse --abbrev-ref HEAD", returnStdout: true).trim()
+                    
                     echo "Branch corrente: ${CURRENT_BRANCH}"
                 }
             }
