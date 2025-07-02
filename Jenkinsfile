@@ -12,7 +12,8 @@ pipeline {
         stage('Clone repo') {
             steps {
                 sh 'pwd'
-                git branch: 'main', url: 'https://github.com/otrebla-snake-ita/jenkins-cicd.git'
+                checkout scm // Dovrebbe far capire a Jenkins il branch da cui è partita l'operazione (push su main = main ecc.)
+                // git branch: 'main', url: 'https://github.com/otrebla-snake-ita/jenkins-cicd.git'
                 sh 'ls -la'
             }
         }
