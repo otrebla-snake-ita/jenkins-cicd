@@ -1,8 +1,6 @@
+def CURRENT_BRANCH = ''
 pipeline {
     agent any
-    environment {
-        CURRENT_BRANCH = ''
-    }
     stages {
 
         stage('Pre checkout') {
@@ -22,8 +20,8 @@ pipeline {
         stage('Stampa branch') {
             steps {
                 script {
-                    env.CURRENT_BRANCH = sh(script: "git rev-parse --abbrev-ref HEAD", returnStdout: true).trim()
-                    echo "Branch corrente: ${env.CURRENT_BRANCH}"
+                    CURRENT_BRANCH = sh(script: "git rev-parse --abbrev-ref HEAD", returnStdout: true).trim()
+                    echo "Branch corrente: ${CURRENT_BRANCH}"
                 }
             }
         }
@@ -73,7 +71,7 @@ pipeline {
         stage('Deploy') {
             when {
                 expression {
-                    return env.CURRENT_BRANCH == 'develop'
+                    return CURRENT_BRANCH == 'develop'
                 }
             }
             steps {
@@ -84,7 +82,7 @@ pipeline {
         stage('Deploy to Production') {
             when {
                 expression {
-                    return env.CURRENT_BRANCH == 'main'
+                    return CURRENT_BRANCH == 'main'
                 }
             }
             steps {
