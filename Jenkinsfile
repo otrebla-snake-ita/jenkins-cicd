@@ -19,8 +19,8 @@ pipeline {
         stage('Stampa branch') {
             steps {
                 script {
-                    echo "BRANCH_NAME: ${env.BRANCH_NAME}"
-                    echo "GIT_COMMIT: ${env.GIT_COMMIT}"
+                    def branch = sh(script: "git rev-parse --abbrev-ref HEAD", returnStdout: true).trim()
+                    echo "Branch corrente: ${branch}"
                 }
             }
         }
